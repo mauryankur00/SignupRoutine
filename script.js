@@ -1,6 +1,6 @@
 // User data for demo purposes (replace this with a real authentication system in production)
 const users = {
-    'Ankur': { password: 'ankur123', tasks: {
+    'Ankur': { tasks: {
         monday: { morning: 'Clean dishes', evening: 'Shape chapati' },
         tuesday: { morning: 'Make Daal & Sabji', evening: 'Bake chapati & make dough' },
         wednesday: { morning: 'Make Rice', evening: 'Cut vegetables & make sabji' },
@@ -9,7 +9,7 @@ const users = {
         saturday: { morning: 'Make Rice', evening: 'Bake chapati & make dough' },
         sunday: { morning: 'Clean dishes', evening: 'Cut vegetables & make sabji' },
     }},
-    'Shreyash': { password: 'shreyash123', tasks: {
+    'Shreyash': { tasks: {
         monday: { morning: 'Make Daal & Sabji', evening: 'Bake chapati & make dough' },
         tuesday: { morning: 'Clean dishes', evening: 'Cut vegetables & make sabji' },
         wednesday: { morning: 'Make Daal & Sabji', evening: 'Shape chapati' },
@@ -18,7 +18,7 @@ const users = {
         saturday: { morning: 'Make Daal & Sabji', evening: 'Cut vegetables & make sabji' },
         sunday: { morning: 'Make Daal & Sabji', evening: 'Bake chapati & make dough' },
     }},
-    'Kartikey': { password: 'kartikey123', tasks: {
+    'Kartikey': { tasks: {
         monday: { morning: 'Make Rice', evening: 'Cut vegetables & make sabji' },
         tuesday: { morning: 'Make Rice', evening: 'Shape chapati' },
         wednesday: { morning: 'Clean dishes', evening: 'Bake chapati & make dough' },
@@ -37,13 +37,10 @@ const currentDay = days[new Date().getDay()];
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
 
-    // Check user credentials
-    if (users[username] && users[username].password === password) {
+    // Check if user was selected
+    if (username) {
         login(username);
-    } else {
-        document.getElementById('login-error').style.display = 'block';
     }
 });
 
@@ -76,5 +73,4 @@ function logout() {
 
     // Clear form
     document.getElementById('login-form').reset();
-    document.getElementById('login-error').style.display = 'none';
 }
