@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Reminder - Login</title>
+    <title>Task Reminder - Select User</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Login Section -->
+    <!-- User Selection Section -->
     <div id="login-section" class="container">
-        <h1>Login to View Your Tasks</h1>
+        <h1>Select Your Profile</h1>
         <form id="login-form">
             <div class="input-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" placeholder="Enter username" required>
+                <label for="username">Select User:</label>
+                <select id="username" required>
+                    <option value="" disabled selected>Select your name</option>
+                    <option value="Ankur">Ankur</option>
+                    <option value="Shreyash">Shreyash</option>
+                    <option value="Kartikey">Kartikey</option>
+                </select>
             </div>
-            <div class="input-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" placeholder="Enter password" required>
-            </div>
-            <button type="submit">Login</button>
+            <button type="submit">View Tasks</button>
         </form>
-        <p id="login-error" class="error-message" style="display:none;">Invalid username or password</p>
     </div>
 
     <!-- Task Section -->
