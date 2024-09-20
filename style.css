@@ -20,7 +20,7 @@ h1, h2 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-input {
+select, button {
     width: 100%;
     padding: 12px;
     margin: 8px 0;
@@ -28,8 +28,6 @@ input {
 }
 
 button {
-    width: 100%;
-    padding: 12px;
     background-color: #333;
     color: white;
     border: none;
@@ -39,11 +37,6 @@ button {
 
 button:hover {
     background-color: #555;
-}
-
-.error-message {
-    color: red;
-    text-align: center;
 }
 
 .table-container {
@@ -68,12 +61,11 @@ th {
 }
 
 @media only screen and (max-width: 600px) {
-    /* Make form inputs full width on small screens */
     .container {
         padding: 10px;
     }
 
-    input, button {
+    select, button {
         padding: 10px;
         font-size: 14px;
     }
