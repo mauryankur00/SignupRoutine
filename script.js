@@ -1,37 +1,40 @@
-// User data for demo purposes (replace this with a real authentication system in production)
+// User data for demo purposes
 const users = {
     'Ankur': { tasks: {
-        monday: { morning: 'Clean dishes', evening: 'Shape chapati' },
-        tuesday: { morning: 'Make Daal & Sabji', evening: 'Bake chapati & make dough' },
-        wednesday: { morning: 'Make Rice', evening: 'Cut vegetables & make sabji' },
-        thursday: { morning: 'Clean dishes', evening: 'Bake chapati & make dough' },
-        friday: { morning: 'Make Daal & Sabji', evening: 'Shape chapati' },
-        saturday: { morning: 'Make Rice', evening: 'Bake chapati & make dough' },
-        sunday: { morning: 'Clean dishes', evening: 'Cut vegetables & make sabji' },
+        monday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        tuesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        wednesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        thursday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        friday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        saturday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        sunday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
     }},
     'Shreyash': { tasks: {
-        monday: { morning: 'Make Daal & Sabji', evening: 'Bake chapati & make dough' },
-        tuesday: { morning: 'Clean dishes', evening: 'Cut vegetables & make sabji' },
-        wednesday: { morning: 'Make Daal & Sabji', evening: 'Shape chapati' },
-        thursday: { morning: 'Make Rice', evening: 'Shape chapati' },
-        friday: { morning: 'Clean dishes', evening: 'Bake chapati & make dough' },
-        saturday: { morning: 'Make Daal & Sabji', evening: 'Cut vegetables & make sabji' },
-        sunday: { morning: 'Make Daal & Sabji', evening: 'Bake chapati & make dough' },
+        monday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        tuesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        wednesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        thursday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        friday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        saturday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        sunday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
     }},
     'Kartikey': { tasks: {
-        monday: { morning: 'Make Rice', evening: 'Cut vegetables & make sabji' },
-        tuesday: { morning: 'Make Rice', evening: 'Shape chapati' },
-        wednesday: { morning: 'Clean dishes', evening: 'Bake chapati & make dough' },
-        thursday: { morning: 'Make Daal & Sabji', evening: 'Cut vegetables & make sabji' },
-        friday: { morning: 'Make Rice', evening: 'Cut vegetables & make sabji' },
-        saturday: { morning: 'Clean dishes', evening: 'Shape chapati' },
-        sunday: { morning: 'Make Rice', evening: 'Shape chapati' },
+        monday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        tuesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        wednesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        thursday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        friday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        saturday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+        sunday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
     }},
 };
 
-// Get the current day in lowercase
+// Get the current and next day in lowercase
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-const currentDay = days[new Date().getDay()];
+const currentDayIndex = new Date().getDay();
+const tomorrowDayIndex = (currentDayIndex + 1) % 7;  // Wrap around to Sunday if today is Saturday
+const currentDay = days[currentDayIndex];
+const tomorrowDay = days[tomorrowDayIndex];
 
 // Handle login form submission
 document.getElementById('login-form').addEventListener('submit', function(event) {
@@ -54,13 +57,20 @@ function login(username) {
     document.getElementById('user-name').textContent = username;
 
     // Display today's tasks for the logged-in user
-    const tasks = users[username].tasks[currentDay];
+    const todayTasks = users[username].tasks[currentDay];
+    const tomorrowTasks = users[username].tasks[tomorrowDay];
+    
     const taskTableBody = document.getElementById('user-tasks');
     taskTableBody.innerHTML = `
         <tr>
             <td>${currentDay.charAt(0).toUpperCase() + currentDay.slice(1)}</td>
-            <td>${tasks.morning}</td>
-            <td>${tasks.evening}</td>
+            <td>${todayTasks.morning}</td>
+            <td>${todayTasks.evening}</td>
+        </tr>
+        <tr>
+            <td>${tomorrowDay.charAt(0).toUpperCase() + tomorrowDay.slice(1)}</td>
+            <td>${tomorrowTasks.morning}</td>
+            <td>${tomorrowTasks.evening}</td>
         </tr>
     `;
 }
