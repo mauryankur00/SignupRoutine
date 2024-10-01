@@ -35,7 +35,7 @@ const weeks = [
             }
         }
     },
-    // Week 2 and Week 3 similar logic
+    // Week 2 and Week 3 logic...
 ];
 
 // Calculate current week
@@ -67,13 +67,13 @@ function login(username) {
     taskTableBody.innerHTML = `
         <tr>
             <td>${days[currentDayIndex].charAt(0).toUpperCase() + days[currentDayIndex].slice(1)}</td>
-            <td>${todayTasks.morning || '—'}</td>
-            <td>${todayTasks.evening || '—'}</td>
+            <td>${todayTasks.morning && todayTasks.morning !== 'Rest' ? todayTasks.morning : '—'}</td>
+            <td>${todayTasks.evening && todayTasks.evening !== 'Rest' ? todayTasks.evening : '—'}</td>
         </tr>
         <tr>
             <td>${days[tomorrowDayIndex].charAt(0).toUpperCase() + days[tomorrowDayIndex].slice(1)}</td>
-            <td>${tomorrowTasks.morning || '—'}</td>
-            <td>${tomorrowTasks.evening || '—'}</td>
+            <td>${tomorrowTasks.morning && tomorrowTasks.morning !== 'Rest' ? tomorrowTasks.morning : '—'}</td>
+            <td>${tomorrowTasks.evening && tomorrowTasks.evening !== 'Rest' ? tomorrowTasks.evening : '—'}</td>
         </tr>
     `;
 }
