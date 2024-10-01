@@ -3,24 +3,24 @@ const weeks = [
     {
         'Ankur': {
             tasks: {
-                monday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                tuesday: { morning: 'Rest', evening: 'Rest' },
-                wednesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+                monday: { morning: 'Morning Dishes', evening: '—' },
+                tuesday: { morning: '—', evening: 'Evening Dishes' },
+                wednesday: { morning: 'Morning Dishes', evening: '—' },
                 thursday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                friday: { morning: 'Rest', evening: 'Rest' },
-                saturday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                sunday: { morning: 'Rest', evening: 'Rest' }
+                friday: { morning: '—', evening: 'Evening Dishes' },
+                saturday: { morning: 'Morning Dishes', evening: '—' },
+                sunday: { morning: '—', evening: 'Evening Dishes' }
             }
         },
         'Shreyash': {
             tasks: {
-                monday: { morning: 'Rest', evening: 'Rest' },
-                tuesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                wednesday: { morning: 'Rest', evening: 'Rest' },
-                thursday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
+                monday: { morning: '—', evening: 'Evening Dishes' },
+                tuesday: { morning: 'Morning Dishes', evening: '—' },
+                wednesday: { morning: '—', evening: 'Evening Dishes' },
+                thursday: { morning: 'Morning Dishes', evening: '—' },
                 friday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                saturday: { morning: 'Rest', evening: 'Rest' },
-                sunday: { morning: 'Morning Dishes', evening: 'Evening Dishes' }
+                saturday: { morning: '—', evening: 'Evening Dishes' },
+                sunday: { morning: 'Morning Dishes', evening: '—' }
             }
         },
         'Kartikey': {
@@ -28,14 +28,14 @@ const weeks = [
                 monday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
                 tuesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
                 wednesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                thursday: { morning: 'Rest', evening: 'Rest' },
-                friday: { morning: 'Rest', evening: 'Rest' },
+                thursday: { morning: '—', evening: '—' },
+                friday: { morning: 'Morning Dishes', evening: '—' },
                 saturday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                sunday: { morning: 'Rest', evening: 'Rest' }
+                sunday: { morning: '—', evening: '—' }
             }
         }
     },
-    // Week 2, Week 3 similar logic
+    // Week 2 and Week 3 similar logic
 ];
 
 // Calculate current week
@@ -67,13 +67,13 @@ function login(username) {
     taskTableBody.innerHTML = `
         <tr>
             <td>${days[currentDayIndex].charAt(0).toUpperCase() + days[currentDayIndex].slice(1)}</td>
-            <td>${todayTasks.morning}</td>
-            <td>${todayTasks.evening}</td>
+            <td>${todayTasks.morning || '—'}</td>
+            <td>${todayTasks.evening || '—'}</td>
         </tr>
         <tr>
             <td>${days[tomorrowDayIndex].charAt(0).toUpperCase() + days[tomorrowDayIndex].slice(1)}</td>
-            <td>${tomorrowTasks.morning}</td>
-            <td>${tomorrowTasks.evening}</td>
+            <td>${tomorrowTasks.morning || '—'}</td>
+            <td>${tomorrowTasks.evening || '—'}</td>
         </tr>
     `;
 }
