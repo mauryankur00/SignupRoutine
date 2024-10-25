@@ -71,8 +71,12 @@
     </table>
 
     <script>
-        const currentDay = 2; // Current day, change this number to highlight another day
-        document.getElementById(`day${currentDay}`).classList.add('highlight');
+        // Get the current day dynamically
+        const totalDays = 6; // Total number of days in the schedule
+        const today = new Date().getDate() % totalDays + 1; // Cycle through the days based on the current date
+
+        // Highlight the row for today
+        document.getElementById(`day${today}`).classList.add('highlight');
     </script>
 </body>
 </html>
