@@ -3,80 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dishwashing Schedule</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 50%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .highlight {
-            background-color: #ffeb3b;
-        }
-    </style>
+    <title>Task Reminder - Select User</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2 style="text-align: center;">Dishwashing Schedule</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Day</th>
-                <th>Morning</th>
-                <th>Evening</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr id="day1">
-                <td>1</td>
-                <td>Ankur</td>
-                <td>Kartikey</td>
-            </tr>
-            <tr id="day2">
-                <td>2</td>
-                <td>Kartikey</td>
-                <td>Ankur</td>
-            </tr>
-            <tr id="day3">
-                <td>3</td>
-                <td>Shreyash</td>
-                <td>Kartikey</td>
-            </tr>
-            <tr id="day4">
-                <td>4</td>
-                <td>Kartikey</td>
-                <td>Shreyash</td>
-            </tr>
-            <tr id="day5">
-                <td>5</td>
-                <td>Ankur</td>
-                <td>Shreyash</td>
-            </tr>
-            <tr id="day6">
-                <td>6</td>
-                <td>Shreyash</td>
-                <td>Ankur</td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- User Selection Section -->
+    <div id="login-section" class="container">
+        <h1>Select Your Profile</h1>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Select User:</label>
+                <select id="username" required>
+                    <option value="" disabled selected>Select your name</option>
+                    <option value="Ankur">Ankur</option>
+                    <option value="Shreyash">Shreyash</option>
+                    <option value="Kartikey">Kartikey</option>
+                </select>
+            </div>
+            <button type="submit">View Tasks</button>
+        </form>
+    </div>
 
-    <script>
-        // Get the current day dynamically
-        const totalDays = 6; // Total number of days in the schedule
-        const today = new Date().getDate() % totalDays + 1; // Cycle through the days based on the current date
+    <!-- Task Section -->
+    <div id="task-section" class="container" style="display:none;">
+        <h1>Welcome, <span id="user-name"></span>!</h1>
+        <h2>Your Tasks for Today</h2>
+        <div class="table-container">
+            <table id="schedule">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Morning Tasks</th>
+                        <th>Evening Tasks</th>
+                    </tr>
+                </thead>
+                <tbody id="user-tasks">
+                    <!-- Tasks will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+        <button onclick="logout()">Logout</button>
+    </div>
 
-        // Highlight the row for today
-        document.getElementById(`day${today}`).classList.add('highlight');
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
