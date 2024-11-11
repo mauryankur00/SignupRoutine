@@ -1,86 +1,76 @@
-// Task Distribution Data for 3 weeks with alternating rest days
-const weeks = [
-    {
-        'Ankur': {
-            tasks: {
-                monday: { morning: 'Morning Dishes', evening: '—' },
-                tuesday: { morning: '—', evening: 'Evening Dishes' },
-                wednesday: { morning: 'Morning Dishes', evening: '—' },
-                thursday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                friday: { morning: '—', evening: 'Evening Dishes' },
-                saturday: { morning: 'Morning Dishes', evening: '—' },
-                sunday: { morning: '—', evening: 'Evening Dishes' }
-            }
-        },
-        'Shreyash': {
-            tasks: {
-                monday: { morning: '—', evening: 'Evening Dishes' },
-                tuesday: { morning: 'Morning Dishes', evening: '—' },
-                wednesday: { morning: '—', evening: 'Evening Dishes' },
-                thursday: { morning: 'Morning Dishes', evening: '—' },
-                friday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                saturday: { morning: '—', evening: 'Evening Dishes' },
-                sunday: { morning: 'Morning Dishes', evening: '—' }
-            }
-        },
-        'Kartikey': {
-            tasks: {
-                monday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                tuesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                wednesday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                thursday: { morning: '—', evening: '—' },
-                friday: { morning: 'Morning Dishes', evening: '—' },
-                saturday: { morning: 'Morning Dishes', evening: 'Evening Dishes' },
-                sunday: { morning: '—', evening: '—' }
-            }
-        }
-    },
-    // Week 2 and Week 3 logic...
-];
+// User data for demo purposes (replace this with a real authentication system in production)
+const users = {
+    'Ankur': { tasks: {
+        monday: { morning: 'Clean dishes', evening: 'Shape chapati' },
+        tuesday: { morning: 'Make Daal & Sabji', evening: 'Bake chapati & make dough' },
+        wednesday: { morning: 'Make Rice', evening: 'Cut vegetables & make sabji' },
+        thursday: { morning: 'Clean dishes', evening: 'Bake chapati & make dough' },
+        friday: { morning: 'Make Daal & Sabji', evening: 'Shape chapati' },
+        saturday: { morning: 'Make Rice', evening: 'Bake chapati & make dough' },
+        sunday: { morning: 'Clean dishes', evening: 'Cut vegetables & make sabji' },
+    }},
+    'Shreyash': { tasks: {
+        monday: { morning: 'Make Daal & Sabji', evening: 'Bake chapati & make dough' },
+        tuesday: { morning: 'Clean dishes', evening: 'Cut vegetables & make sabji' },
+        wednesday: { morning: 'Make Daal & Sabji', evening: 'Shape chapati' },
+        thursday: { morning: 'Make Rice', evening: 'Shape chapati' },
+        friday: { morning: 'Clean dishes', evening: 'Bake chapati & make dough' },
+        saturday: { morning: 'Make Daal & Sabji', evening: 'Cut vegetables & make sabji' },
+        sunday: { morning: 'Make Daal & Sabji', evening: 'Bake chapati & make dough' },
+    }},
+    'Kartikey': { tasks: {
+        monday: { morning: 'Make Rice', evening: 'Cut vegetables & make sabji' },
+        tuesday: { morning: 'Make Rice', evening: 'Shape chapati' },
+        wednesday: { morning: 'Clean dishes', evening: 'Bake chapati & make dough' },
+        thursday: { morning: 'Make Daal & Sabji', evening: 'Cut vegetables & make sabji' },
+        friday: { morning: 'Make Rice', evening: 'Cut vegetables & make sabji' },
+        saturday: { morning: 'Clean dishes', evening: 'Shape chapati' },
+        sunday: { morning: 'Make Rice', evening: 'Shape chapati' },
+    }},
+};
 
-// Calculate current week
-const currentWeek = Math.floor((new Date() - new Date(2024, 0, 1)) / (7 * 24 * 60 * 60 * 1000)) % 3;
+// Get the current day in lowercase
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-const currentDayIndex = new Date().getDay();
-const tomorrowDayIndex = (currentDayIndex + 1) % 7;
+const currentDay = days[new Date().getDay()];
 
 // Handle login form submission
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;
 
+    // Check if user was selected
     if (username) {
         login(username);
     }
 });
 
-// Login and show tasks for today and tomorrow
+// Login function
 function login(username) {
+    // Hide login section, show task section
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('task-section').style.display = 'block';
+    
+    // Set user name
     document.getElementById('user-name').textContent = username;
 
-    const todayTasks = weeks[currentWeek][username].tasks[days[currentDayIndex]];
-    const tomorrowTasks = weeks[currentWeek][username].tasks[days[tomorrowDayIndex]];
-
+    // Display today's tasks for the logged-in user
+    const tasks = users[username].tasks[currentDay];
     const taskTableBody = document.getElementById('user-tasks');
     taskTableBody.innerHTML = `
         <tr>
-            <td>${days[currentDayIndex].charAt(0).toUpperCase() + days[currentDayIndex].slice(1)}</td>
-            <td>${todayTasks.morning && todayTasks.morning !== 'Rest' ? todayTasks.morning : '—'}</td>
-            <td>${todayTasks.evening && todayTasks.evening !== 'Rest' ? todayTasks.evening : '—'}</td>
-        </tr>
-        <tr>
-            <td>${days[tomorrowDayIndex].charAt(0).toUpperCase() + days[tomorrowDayIndex].slice(1)}</td>
-            <td>${tomorrowTasks.morning && tomorrowTasks.morning !== 'Rest' ? tomorrowTasks.morning : '—'}</td>
-            <td>${tomorrowTasks.evening && tomorrowTasks.evening !== 'Rest' ? tomorrowTasks.evening : '—'}</td>
+            <td>${currentDay.charAt(0).toUpperCase() + currentDay.slice(1)}</td>
+            <td>${tasks.morning}</td>
+            <td>${tasks.evening}</td>
         </tr>
     `;
 }
 
-// Logout function to reset everything
+// Logout function
 function logout() {
+    // Hide task section, show login section
     document.getElementById('login-section').style.display = 'block';
     document.getElementById('task-section').style.display = 'none';
+
+    // Clear form
     document.getElementById('login-form').reset();
-}
+            }
